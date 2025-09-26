@@ -3,20 +3,20 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#0044B3", // Azul principal
+			main: "#0044B3",
 			light: "#3366CC",
 			dark: "#003399",
 			contrastText: "#FFFFFF",
 		},
 		secondary: {
-			main: "#FF6B00", // Laranja secundário
+			main: "#FF6B00",
 			light: "#FF944D",
 			dark: "#CC5500",
 			contrastText: "#FFFFFF",
 		},
 		background: {
-			default: "#F9FAFB", // fundo das páginas
-			paper: "#FFFFFF", // fundo de cards
+			default: "#F9FAFB",
+			paper: "#FFFFFF",
 		},
 		text: {
 			primary: "#1A1A1A",
@@ -45,7 +45,7 @@ const theme = createTheme({
 			color: "#4D4D4D",
 		},
 		button: {
-			textTransform: "none", // mantém o texto dos botões sem CAPS LOCK
+			textTransform: "none",
 			fontWeight: 600,
 		},
 	},
@@ -59,7 +59,7 @@ const theme = createTheme({
 		},
 	},
 	shape: {
-		borderRadius: 12, // bordas arredondadas padrão
+		borderRadius: 12,
 	},
 	components: {
 		MuiButton: {

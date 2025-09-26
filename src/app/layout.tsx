@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import theme from "../theme";
+import ThemeRegistry from "@/providers/ThemeRegistry";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -29,7 +30,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AppRouterCacheProvider>
-					<ThemeProvider theme={theme}>{children}</ThemeProvider>
+					<ThemeRegistry>{children}</ThemeRegistry>
 				</AppRouterCacheProvider>
 			</body>
 		</html>
