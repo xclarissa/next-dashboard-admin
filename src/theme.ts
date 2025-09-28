@@ -1,80 +1,98 @@
 import { createTheme } from "@mui/material/styles";
 
+const colors = {
+	primary: "#023047", // Blue/Navy Dark
+	secondary: "#219ebc", // Deep Cyan
+	info: "#8ecae6", // Light Sky Blue (Para informações e backgrounds leves)
+	warning: "#ffb703", // Golden Yellow
+	error: "#fb8500", // Deep Orange (Usado como erro para urgência)
+	success: "#28a745", // Mantendo o verde tradicional para sucesso/OK
+};
+
 const theme = createTheme({
 	palette: {
+		mode: "light",
 		primary: {
-			main: "#0044B3",
-			light: "#3366CC",
-			dark: "#003399",
-			contrastText: "#FFFFFF",
+			main: colors.primary,
+			light: "#315e71",
+			dark: "#001c29",
+			contrastText: "#ffffff",
 		},
 		secondary: {
-			main: "#FF6B00",
-			light: "#FF944D",
-			dark: "#CC5500",
-			contrastText: "#FFFFFF",
+			main: colors.secondary,
+			light: "#4faec6",
+			dark: "#007090",
+			contrastText: "#ffffff",
 		},
+
+		error: {
+			main: colors.error,
+			contrastText: "#ffffff",
+		},
+		success: {
+			main: colors.success,
+			contrastText: "#ffffff",
+		},
+		info: {
+			main: colors.info,
+			contrastText: colors.primary,
+		},
+		warning: {
+			main: colors.warning,
+			contrastText: colors.primary,
+		},
+
 		background: {
-			default: "#F9FAFB",
-			paper: "#FFFFFF",
-		},
-		text: {
-			primary: "#1A1A1A",
-			secondary: "#4D4D4D",
+			default: "#f8f9fa",
+			paper: "#ffffff",
 		},
 	},
-	typography: {
-		fontFamily: "Roboto, Arial, sans-serif",
-		h1: {
-			fontSize: "2.5rem",
-			fontWeight: 700,
-		},
-		h2: {
-			fontSize: "2rem",
-			fontWeight: 600,
-		},
-		h3: {
-			fontSize: "1.75rem",
-			fontWeight: 600,
-		},
-		body1: {
-			fontSize: "1rem",
-		},
-		body2: {
-			fontSize: "0.875rem",
-			color: "#4D4D4D",
-		},
-		button: {
-			textTransform: "none",
-			fontWeight: 600,
-		},
-	},
-	breakpoints: {
-		values: {
-			xs: 0,
-			sm: 600,
-			md: 900,
-			lg: 1200,
-			xl: 1536,
-		},
-	},
-	shape: {
-		borderRadius: 12,
-	},
+
 	components: {
-		MuiButton: {
+		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					borderRadius: 8,
-					padding: "8px 16px",
+					backgroundColor: "#ffffff",
+					color: colors.primary,
+					boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
 				},
 			},
 		},
-		MuiPaper: {
+
+		MuiIconButton: {
+			styleOverrides: {
+				root: {
+					color: colors.primary,
+				},
+			},
+		},
+
+		MuiListItemButton: {
+			styleOverrides: {
+				root: {
+					"&.Mui-selected": {
+						backgroundColor: colors.primary,
+						color: "#ffffff",
+						"& .MuiListItemIcon-root": {
+							color: "#ffffff",
+						},
+						"&:hover": {
+							backgroundColor: colors.primary,
+							opacity: 0.9,
+						},
+					},
+					"&:hover": {
+						backgroundColor: colors.info + "20",
+					},
+				},
+			},
+		},
+
+		MuiCard: {
 			styleOverrides: {
 				root: {
 					borderRadius: 12,
-					padding: "16px",
+					boxShadow: "0 4px 10px rgba(0, 0, 0, 0.08)",
 				},
 			},
 		},

@@ -23,6 +23,7 @@ describe("Select", () => {
         expect(screen.getByLabelText(/selecione/i)).toBeInTheDocument()
     })
 
+    // TO DO: ajustar teste para pegar o valor do input
     it("should select an option", async () => {
         const user = userEvent.setup();
         const mockChange = jest.fn();
