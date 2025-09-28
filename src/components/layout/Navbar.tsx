@@ -4,7 +4,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { DRAWER_WIDTH } from "@/config/constants";
 
-export const Navbar = () => {
+interface NavbarProps {
+	isMobile: boolean;
+}
+
+export const Navbar = ({ isMobile }: NavbarProps) => {
 	const { isSidebarOpen, toggleSidebar } = useSidebar();
 
 	return (
@@ -12,11 +16,13 @@ export const Navbar = () => {
 			position="fixed"
 			sx={{
 				zIndex: (theme) => theme.zIndex.drawer + 1,
-				transition: (theme) =>
-					theme.transitions.create(["width", "margin"], {
-						easing: theme.transitions.easing.sharp,
-						duration: theme.transitions.duration.leavingScreen,
-					}),
+				...(isMobile && {
+					transition: (theme) =>
+						theme.transitions.create(["width", "margin"], {
+							easing: theme.transitions.easing.sharp,
+							duration: theme.transitions.duration.leavingScreen,
+						}),
+				}),
 				...(isSidebarOpen && {
 					marginLeft: DRAWER_WIDTH,
 					width: `calc(100% - ${DRAWER_WIDTH}px)`,
@@ -36,6 +42,7 @@ export const Navbar = () => {
 					edge="start"
 					sx={{
 						marginRight: 5,
+						...(!isMobile && isSidebarOpen && { display: 'none' }),
 					}}
 				>
 					<MenuIcon />

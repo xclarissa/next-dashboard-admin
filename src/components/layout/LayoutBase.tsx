@@ -1,6 +1,6 @@
 "use client";
-import { Box, Toolbar, styled } from "@mui/material";
-import React, { ReactNode } from "react";
+import { Box, Toolbar, styled, useMediaQuery, useTheme } from "@mui/material";
+import React, { ReactNode, useEffect } from "react";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 import { DRAWER_WIDTH } from "@/config/constants";
@@ -10,33 +10,57 @@ interface LayoutBaseProps {
 	children: ReactNode;
 }
 
+const BREAKPOINT = "md";
+
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
 	open?: boolean;
-}>(({ theme, open }) => ({
+	isMobile?: boolean;
+}>(({ theme, open, isMobile }) => ({
 	flexGrow: 1,
 	padding: theme.spacing(3),
-	transition: theme.transitions.create("margin", {
+	transition: theme.transitions.create(["margin", "width"], {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
 	marginLeft: 0,
-	...(open && {
-		transition: theme.transitions.create("margin", {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen,
+	...(!isMobile &&
+		open && {
+			transition: theme.transitions.create(["margin", "width"], {
+				easing: theme.transitions.easing.easeOut,
+				duration: theme.transitions.duration.enteringScreen,
+			}),
+			marginLeft: DRAWER_WIDTH,
 		}),
-		marginLeft: DRAWER_WIDTH,
+	...(isMobile && {
+		marginLeft: 0,
 	}),
+	// ...(open && {
+	// 	transition: theme.transitions.create("margin", {
+	// 		easing: theme.transitions.easing.easeOut,
+	// 		duration: theme.transitions.duration.enteringScreen,
+	// 	}),
+	// 	marginLeft: DRAWER_WIDTH,
+	// }),
 }));
 
 export const LayoutBase = ({ children }: LayoutBaseProps) => {
-	const { isSidebarOpen } = useSidebar();
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down(BREAKPOINT));
+	const { isSidebarOpen, openSidebar, closeSidebar } = useSidebar();
+
+	useEffect(() => {
+		if (!isMobile) {
+			openSidebar();
+		} else {
+			closeSidebar();
+		}
+	}, [isMobile]);
 
 	return (
 		<Box sx={{ display: "flex" }}>
-			<Navbar />
-			<Sidebar />
-			<Main open={isSidebarOpen}>
+			<Navbar isMobile={isMobile} />
+			<Sidebar isMobile={isMobile} />
+			<Main open={isSidebarOpen} isMobile={isMobile}>
 				<Toolbar />
 				{children}
 			</Main>
